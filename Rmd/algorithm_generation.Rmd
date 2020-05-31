@@ -31,16 +31,16 @@ dist_prev = abs(round(rnorm(1000,2,1),2))
 dist_next = abs(round(rnorm(1000,2,1),2))
 crowd_curr = rpois(1000,25)
 crowd_next = rpois(1000,25)
-booked = rpois(1000,40)
 schd_time = sample(seq(strptime('01/01/2018',format = "%d/%m/%Y"),
                        strptime('01/01/2019',format = "%d/%m/%Y"),
                        by="hour"), 1000, replace = T)
 arr_time = schd_time+(rnorm(1000,300,350)*-1)
 on_time = ifelse(difftime(arr_time,schd_time)<=0,1,0)
-data = data.frame(crowd_curr,crowd_next,booked,
+time_delay = difftime(arr_time,schd_time)
+data = data.frame(crowd_curr,crowd_next,
                   dist_prev, dist_next,speed,
-                  schd_time,arr_time,on_time)
-head(select(data,crowd_curr,crowd_next,booked,on_time))
+                  schd_time,arr_time,on_time,time_delay)
+head(select(data,crowd_curr,crowd_next,on_time))
 ```
 
 
@@ -49,17 +49,26 @@ head(select(data,crowd_curr,crowd_next,booked,on_time))
 Each record is considered as a bus and the label is the indication given to the bus driver whether to maintain speed, decrease speed, or to increase represented by 0,1,2 respectively 
 
 ```{r}
-indicate = ifelse((
-    (crowd_curr<28)&
-    (crowd_next>28)&
-    (booked>30)&
-    (on_time==0)),2,ifelse((
-      (crowd_curr>28)&
-      (crowd_next<28)&
-      (booked<30)&
-      (on_time==1)),1,0))
-data$indicate = indicate
-head(select(data,crowd_curr,booked,on_time,indicate))
+data = data %>% mutate(.,indicate = with(.,case_when(
+  (dist_next<1.8 & dist_prev<1.8 & crowd_next<25 & crowd_curr<28) ~ 0,
+  (dist_next<1.8 & dist_prev<1.8 & crowd_next<25 & crowd_curr>28) ~ 0,
+  (dist_next<1.8 & dist_prev<1.8 & crowd_next>25 & crowd_curr<28) ~ 2,
+  (dist_next<1.8 & dist_prev<1.8 & crowd_next>25 & crowd_curr>28) ~ 0,
+  (dist_next<1.8 & dist_prev>1.8 & crowd_next<25 & crowd_curr<28) ~ 1,
+  (dist_next<1.8 & dist_prev>1.8 & crowd_next<25 & crowd_curr>28) ~ 1,
+  (dist_next<1.8 & dist_prev>1.8 & crowd_next>25 & crowd_curr<28) ~ 2,
+  (dist_next<1.8 & dist_prev>1.8 & crowd_next>25 & crowd_curr>28) ~ 1,
+  (dist_next>1.8 & dist_prev<1.8 & crowd_next<25 & crowd_curr<28) ~ 2,
+  (dist_next>1.8 & dist_prev<1.8 & crowd_next<25 & crowd_curr>28) ~ 0,
+  (dist_next>1.8 & dist_prev<1.8 & crowd_next>25 & crowd_curr<28) ~ 2,
+  (dist_next>1.8 & dist_prev<1.8 & crowd_next>25 & crowd_curr>28) ~ 2,
+  (dist_next>1.8 & dist_prev>1.8 & crowd_next<25 & crowd_curr<28) ~ 0,
+  (dist_next>1.8 & dist_prev>1.8 & crowd_next<25 & crowd_curr>28) ~ 0,
+  (dist_next>1.8 & dist_prev>1.8 & crowd_next>25 & crowd_curr<28) ~ 2,
+  (dist_next>1.8 & dist_prev>1.8 & crowd_next>25 & crowd_curr>28) ~ 0,
+)))
+
+head(select(data,crowd_curr,on_time,indicate))
 ```
 
 The table below indicates the indications that each of the bus instances receive 
@@ -98,17 +107,5 @@ Visualizing the decision tree
 ```{r}
 rpart.plot(dtree, nn=TRUE)
 ```
-
-Using C50 algorithm to model 
-
-```{r}
-dtree = C5.0(train[,-c(4:8,10)],as.factor(train[,10]))
-summary(dtree)
-```
-
-Visualize outcome 
-
-```{r}
-plot(dtree, main = 'Bus Scheduling tree')
 ```
 
