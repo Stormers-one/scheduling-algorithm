@@ -18,6 +18,7 @@ invisible(library(caTools))
 invisible(library(data.table))
 invisible(library(rpart))
 invisible(library(rpart.plot))
+invisible(library(C50))
 ```
 
 
@@ -96,5 +97,18 @@ Visualizing the decision tree
 
 ```{r}
 rpart.plot(dtree, nn=TRUE)
+```
+
+Using C50 algorithm to model 
+
+```{r}
+dtree = C5.0(train[,-c(4:8,10)],as.factor(train[,10]))
+summary(dtree)
+```
+
+Visualize outcome 
+
+```{r}
+plot(dtree, main = 'Bus Scheduling tree')
 ```
 
