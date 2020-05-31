@@ -16,6 +16,8 @@ invisible(library(dplyr))
 invisible(library(lubridate))
 invisible(library(caTools))
 invisible(library(data.table))
+invisible(library(rpart))
+invisible(library(rpart.plot))
 ```
 
 
@@ -63,5 +65,36 @@ The table below indicates the indications that each of the bus instances receive
 
 ```{r}
 table(data$indicate)
+```
+
+
+## Modelling a decision tree algorithm to make future scheduling 
+
+Splitting the data into train and test 
+
+```{r}
+set.seed(1)
+split = sample.split(data$indicate, SplitRatio = 0.75)
+train = data[split,]
+test = data[!split,]
+```
+
+
+Creating a penalty matrix to avoid miscalculation 
+
+```{r}
+penalty.matrix <- matrix(c(1,1,0,10,0,10,0,0,0), byrow=TRUE, nrow=3)
+```
+
+Building the decision tree model with rpart 
+
+```{r}
+dtree <- rpart(indicate~.,data=data,method = "class")
+```
+
+Visualizing the decision tree 
+
+```{r}
+rpart.plot(dtree, nn=TRUE)
 ```
 
