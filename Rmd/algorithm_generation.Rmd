@@ -107,5 +107,4 @@ Visualizing the decision tree
 ```{r}
 rpart.plot(dtree, nn=TRUE)
 ```
-```
 
