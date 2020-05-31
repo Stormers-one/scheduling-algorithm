@@ -17,7 +17,9 @@ speed = round(rnorm(1000,50,15),2)
 dist_prev = abs(round(rnorm(1000,2,1),2))
 dist_next = abs(round(rnorm(1000,2,1),2))
 crowd = rpois(1000,25)
-schd_time = sample(seq(strptime('01/01/2018',format = "%d/%m/%Y"), strptime('01/01/2019',format = "%d/%m/%Y"), by="hour"), 1000, replace = T)
+schd_time = sample(seq(strptime('01/01/2018',format = "%d/%m/%Y"),
+                       strptime('01/01/2019',format = "%d/%m/%Y"),
+                       by="hour"), 1000, replace = T)
 arr_time = schd_time+(rnorm(1000,300,350)*-1)
 on_time = ifelse(difftime(arr_time,schd_time)<=0,1,0)
 data = data.frame(crowd,dist_prev,dist_next,speed,schd_time,arr_time,on_time)
