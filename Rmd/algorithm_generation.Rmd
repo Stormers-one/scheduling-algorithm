@@ -21,7 +21,7 @@ schd_time = sample(seq(strptime('01/01/2018',format = "%d/%m/%Y"), strptime('01/
 arr_time = schd_time+rnorm(1000,300,350)
 on_time = ifelse(difftime(arr_time,schd_time)>0,1,0)
 data = data.frame(crowd,dist_prev,dist_next,speed,schd_time,arr_time,on_time)
-data
+head(data)
 ```
 
 
