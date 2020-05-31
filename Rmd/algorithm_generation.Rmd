@@ -1,0 +1,31 @@
+---
+title: "Algorithm"
+author: "Anandu R"
+date: "5/31/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Generating the dataset 
+
+```{r}
+set.seed(1)
+speed = round(rnorm(1000,50,15),2)
+dist_prev = abs(round(rnorm(1000,2,1),2))
+dist_next = abs(round(rnorm(1000,2,1),2))
+crowd = rpois(1000,25)
+schd_time = sample(seq(strptime('01/01/2018',format = "%d/%m/%Y"), strptime('01/01/2019',format = "%d/%m/%Y"), by="hour"), 1000, replace = T)
+arr_time = schd_time+rnorm(1000,300,350)
+on_time = ifelse(difftime(arr_time,schd_time)>0,1,0)
+data = data.frame(crowd,dist_prev,dist_next,speed,schd_time,arr_time,on_time)
+data
+```
+
+
+## Generating an algorithm to label the datasets 
+
+Each record is considered as a bus and the label is the indication given to the bus driver whether to maintain speed, decrease speed, or to increase represented by 0,1,2 respectively 
+
