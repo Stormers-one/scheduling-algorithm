@@ -59,3 +59,9 @@ data$indicate = indicate
 head(select(data,crowd_curr,booked,on_time,indicate))
 ```
 
+The table below indicates the indications that each of the bus instances receive 
+
+```{r}
+table(data$indicate)
+```
+
