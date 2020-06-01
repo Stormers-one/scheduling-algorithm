@@ -53,7 +53,7 @@ time_delay = difftime(arr_time,schd_time)
 data = data.frame(crowd_curr,crowd_next,
                   dist_prev, dist_next,speed,
                   schd_time,arr_time,on_time,time_delay)
-head(select(data,crowd_curr,crowd_next,on_time))
+head(select(data,crowd_curr,crowd_next,on_time),10)
 ```
 
 
@@ -81,21 +81,40 @@ data = data %>% mutate(.,indicate = with(.,case_when(
   (dist_next>1.8 & dist_prev>1.8 & crowd_next>25 & crowd_curr>28) ~ 0,
 )))
 
-head(select(data,crowd_curr,on_time,indicate))
-```
+head(select(data,crowd_curr,on_time,indicate),10)
+```  
+
+&nbsp;  
+
+&nbsp;  
+
+&nbsp;  
 
 The table below indicates the indications that each of the bus instances receive 
 
 ```{r}
-data$indicate = factor(data$indicate,levels=c(0,1,2),labels = c("Maintain Speed","Slow Down","Speed Up"))
+data$indicate = factor(data$indicate,
+                       levels=c(0,1,2),
+                       labels = c("Maintain Speed",
+                                  "Slow Down",
+                                  "Speed Up"))
 table(data$indicate)
-```
+```  
 
-Thus we obtain the following observations from above table:
-Number of buses instructed to "Maintain Speed" : 314
-Number of buses instructed to "Slow Down" : 123
-Number of buses instructed to "Speed Up" : 412
+Thus we obtain the following observations from above table:  
 
+- Number of buses instructed to "Maintain Speed" : 314
+- Number of buses instructed to "Slow Down" : 123
+- Number of buses instructed to "Speed Up" : 412  
+
+
+&nbsp;  
+
+&nbsp;  
+
+&nbsp;  
+
+&nbsp;  
 
 ## Modelling a decision tree algorithm to make future scheduling 
 
@@ -113,7 +132,27 @@ Creating a penalty matrix to avoid miscalculation
 
 ```{r}
 penalty.matrix <- matrix(c(1,1,0,10,0,10,0,0,0), byrow=TRUE, nrow=3)
-```
+```  
+
+&nbsp;  
+
+&nbsp;  
+
+&nbsp;  
+
+&nbsp;  
+
+&nbsp;  
+
+&nbsp;  
+
+&nbsp;  
+
+&nbsp;  
+
+&nbsp; 
+
+&nbsp;
 
 Building the decision tree model with rpart 
 
