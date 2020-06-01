@@ -24,6 +24,19 @@ invisible(library(C50))
 
 ## Generating the dataset 
 
+Data description:
+
+- speed: Real-time speed of the bus in commute .
+- dist_prev: The distance between the current bus and the previous bus on the same route.
+- dist_next: The distance between the current bus and the next bus on the same route.
+- crowd_curr: The number of passengers currently in the bus.
+- crowd_next: The number of passengers in the next bus on the same route.
+- schd_time: The scheduled arrival time specified for bus at previous stop on their route.
+- arr_time: The actual arrival time of the bus at the previous stop on their route.
+- on_time: Whether the bus arrived on time or not at the previous stop on their route.
+- time_delay: The difference between the actual arrival time and the scheduled arrival time.
+
+
 ```{r}
 set.seed(1)
 speed = round(rnorm(1000,50,15),2)
@@ -74,8 +87,14 @@ head(select(data,crowd_curr,on_time,indicate))
 The table below indicates the indications that each of the bus instances receive 
 
 ```{r}
+data$indicate = factor(data$indicate,levels=c(0,1,2),labels = c("Maintain Speed","Slow Down","Speed Up"))
 table(data$indicate)
 ```
+
+Thus we obtain the following observations from above table:
+Number of buses instructed to "Maintain Speed" : 314
+Number of buses instructed to "Slow Down" : 123
+Number of buses instructed to "Speed Up" : 412
 
 
 ## Modelling a decision tree algorithm to make future scheduling 
