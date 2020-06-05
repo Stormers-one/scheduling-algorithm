@@ -164,5 +164,34 @@ Visualizing the decision tree
 
 ```{r}
 rpart.plot(dtree, nn=TRUE)
+```  
+
+&nbsp;  
+
+&nbsp;  
+
+&nbsp;  
+
+&nbsp;  
+
+&nbsp;  
+
+&nbsp;  
+
+&nbsp;  
+
+&nbsp;  
+
+&nbsp; 
+
+&nbsp;
+
+
+## Using speed and on_time parameters 
+
+The speed and on_time parameters can be used for further analysis and using a regression model, we can provide the driver with recommended speed indication to maintain their schedule, and to keep them aware of whether they're on time or not 
+
+```{r}
+head(select(data,speed,on_time))
 ```
 
