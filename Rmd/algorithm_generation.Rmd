@@ -18,7 +18,8 @@ invisible(library(caTools))
 invisible(library(data.table))
 invisible(library(rpart))
 invisible(library(rpart.plot))
-invisible(library(C50))
+invisible(library(ggplot2))
+invisible(library(reshape2))
 ```
 
 
@@ -193,5 +194,82 @@ The speed and on_time parameters can be used for further analysis and using a re
 
 ```{r}
 head(select(data,speed,on_time))
+```
+
+## Bus re-rerouting 
+
+Consider each bus to be part of an area(a cluster), and each area has n number of buses, there are several routes in a given area, each route has predetermined number of buses plying through them.
+
+Creating dummy dataset
+```{r}
+set.seed(0)
+data_route_1 = data.frame(time = 0:23, crowd = c(round(rnorm(6,8,2)),round(rnorm(6,12,2)),round(rnorm(6,15,2)),round(rnorm(3,12,1)),round(rnorm(3,6,1))))
+data_route_2 = data.frame(time = 0:23, crowd = c(round(rnorm(6,8,2)),round(rnorm(6,12,2)),round(rnorm(6,15,2)),round(rnorm(3,12,1)),round(rnorm(3,6,1))))
+data_route_2[15,2] = 13
+data_route_3 = data.frame(time = 0:23, crowd = c(round(rnorm(6,8,2)),round(rnorm(6,12,2)),round(rnorm(6,15,2)),round(rnorm(3,12,1)),round(rnorm(3,6,1))))
+data_route_3[7,2] = 17
+data_route_3[16,2] = 12
+```
+
+
+Using data analytics we determine the peak time of each route 
+```{r}
+g1 = ggplot(
+  data_route_1,
+      aes(
+        x = time,
+        y = crowd
+      )
+) 
+g1 = g1 + geom_line(color = "orange", size = 3) + theme_bw() + ggtitle("Peak Time Analysis")
+g1
+```
+
+We can see that for route 1 the peak times are roughly around 9 am and 4 pm
+
+```{r}
+g1 + geom_vline(xintercept =9,size = 2) + geom_vline(xintercept =16, size = 2) 
+```
+
+Similarly we have analytical data on other routes, here - route 2 and route 3, with their respective peak times. 
+
+```{r}
+g2 = ggplot(
+  data_route_2,
+      aes(
+        x = time,
+        y = crowd
+      )
+) 
+g2 = g2 + geom_line(color = "orangered", size = 3) + theme_bw() + ggtitle("Peak Time Analysis") + geom_vline(xintercept =12,size = 2) + geom_vline(xintercept =16, size = 2) 
+g2
+```
+
+
+```{r}
+g2 = ggplot(
+  data_route_3,
+      aes(
+        x = time,
+        y = crowd
+      )
+) 
+g2 = g2 + geom_line(color = "steelblue", size = 3) + theme_bw() + ggtitle("Peak Time Analysis") + geom_vline(xintercept =6,size = 2) + geom_vline(xintercept =12, size = 2) 
+g2
+```
+
+We make a comparative study of the different peak times and schedules buses through various routes depending on the analytical data on those peak time.
+
+```{r}
+data_all = data.frame(data_route_1$time,data_route_1$crowd,data_route_2$crowd,data_route_3$crowd)
+names(data_all) = c("time","crowd_route_1","crowd_route_2","crowd_route_3")
+
+
+g = ggplot(data_melt, aes(x = time)) + 
+  geom_line(aes(y = crowd_route_1), color = "orange", size = 2) + 
+  geom_line(aes(y = crowd_route_2), color = "orangered", size = 2) +
+  geom_line(aes(y = crowd_route_3), color = "steelblue", size = 2) + 
+  theme_bw()
+g
 ```
 

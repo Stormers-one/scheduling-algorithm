@@ -1,0 +1,501 @@
+% Options for packages loaded elsewhere
+\PassOptionsToPackage{unicode}{hyperref}
+\PassOptionsToPackage{hyphens}{url}
+%
+\documentclass[
+]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+  \usepackage{textcomp} % provide euro and other symbols
+\else % if luatex or xetex
+  \usepackage{unicode-math}
+  \defaultfontfeatures{Scale=MatchLowercase}
+  \defaultfontfeatures[\rmfamily]{Ligatures=TeX,Scale=1}
+\fi
+% Use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\IfFileExists{microtype.sty}{% use microtype if available
+  \usepackage[]{microtype}
+  \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\makeatletter
+\@ifundefined{KOMAClassName}{% if non-KOMA class
+  \IfFileExists{parskip.sty}{%
+    \usepackage{parskip}
+  }{% else
+    \setlength{\parindent}{0pt}
+    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
+}{% if KOMA class
+  \KOMAoptions{parskip=half}}
+\makeatother
+\usepackage{xcolor}
+\IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
+\IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
+\hypersetup{
+  pdftitle={Algorithm},
+  pdfauthor={Anandu R},
+  hidelinks,
+  pdfcreator={LaTeX via pandoc}}
+\urlstyle{same} % disable monospaced font for URLs
+\usepackage[margin=1in]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+% Set default figure placement to htbp
+\makeatletter
+\def\fps@figure{htbp}
+\makeatother
+\setlength{\emergencystretch}{3em} % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{-\maxdimen} % remove section numbering
+
+\title{Algorithm}
+\author{Anandu R}
+\date{5/31/2020}
+
+\begin{document}
+\maketitle
+
+\hypertarget{importing-necessary-packageslibraries}{%
+\subsection{Importing necessary
+packages/Libraries}\label{importing-necessary-packageslibraries}}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{invisible}\NormalTok{(}\KeywordTok{library}\NormalTok{(dplyr))}
+\KeywordTok{invisible}\NormalTok{(}\KeywordTok{library}\NormalTok{(lubridate))}
+\KeywordTok{invisible}\NormalTok{(}\KeywordTok{library}\NormalTok{(caTools))}
+\KeywordTok{invisible}\NormalTok{(}\KeywordTok{library}\NormalTok{(data.table))}
+\KeywordTok{invisible}\NormalTok{(}\KeywordTok{library}\NormalTok{(rpart))}
+\KeywordTok{invisible}\NormalTok{(}\KeywordTok{library}\NormalTok{(rpart.plot))}
+\KeywordTok{invisible}\NormalTok{(}\KeywordTok{library}\NormalTok{(ggplot2))}
+\KeywordTok{invisible}\NormalTok{(}\KeywordTok{library}\NormalTok{(reshape2))}
+\end{Highlighting}
+\end{Shaded}
+
+\hypertarget{generating-the-dataset}{%
+\subsection{Generating the dataset}\label{generating-the-dataset}}
+
+Data description:
+
+\begin{itemize}
+\tightlist
+\item
+  speed: Real-time speed of the bus in commute .
+\item
+  dist\_prev: The distance between the current bus and the previous bus
+  on the same route.
+\item
+  dist\_next: The distance between the current bus and the next bus on
+  the same route.
+\item
+  crowd\_curr: The number of passengers currently in the bus.
+\item
+  crowd\_next: The number of passengers in the next bus on the same
+  route.
+\item
+  schd\_time: The scheduled arrival time specified for bus at previous
+  stop on their route.
+\item
+  arr\_time: The actual arrival time of the bus at the previous stop on
+  their route.
+\item
+  on\_time: Whether the bus arrived on time or not at the previous stop
+  on their route.
+\item
+  time\_delay: The difference between the actual arrival time and the
+  scheduled arrival time.
+\end{itemize}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{speed =}\StringTok{ }\KeywordTok{round}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1000}\NormalTok{,}\DecValTok{50}\NormalTok{,}\DecValTok{15}\NormalTok{),}\DecValTok{2}\NormalTok{)}
+\NormalTok{dist_prev =}\StringTok{ }\KeywordTok{abs}\NormalTok{(}\KeywordTok{round}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1000}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{),}\DecValTok{2}\NormalTok{))}
+\NormalTok{dist_next =}\StringTok{ }\KeywordTok{abs}\NormalTok{(}\KeywordTok{round}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1000}\NormalTok{,}\DecValTok{2}\NormalTok{,}\DecValTok{1}\NormalTok{),}\DecValTok{2}\NormalTok{))}
+\NormalTok{crowd_curr =}\StringTok{ }\KeywordTok{rpois}\NormalTok{(}\DecValTok{1000}\NormalTok{,}\DecValTok{25}\NormalTok{)}
+\NormalTok{crowd_next =}\StringTok{ }\KeywordTok{rpois}\NormalTok{(}\DecValTok{1000}\NormalTok{,}\DecValTok{25}\NormalTok{)}
+\NormalTok{schd_time =}\StringTok{ }\KeywordTok{sample}\NormalTok{(}\KeywordTok{seq}\NormalTok{(}\KeywordTok{strptime}\NormalTok{(}\StringTok{'01/01/2018'}\NormalTok{,}\DataTypeTok{format =} \StringTok{"%d/%m/%Y"}\NormalTok{),}
+                       \KeywordTok{strptime}\NormalTok{(}\StringTok{'01/01/2019'}\NormalTok{,}\DataTypeTok{format =} \StringTok{"%d/%m/%Y"}\NormalTok{),}
+                       \DataTypeTok{by=}\StringTok{"hour"}\NormalTok{), }\DecValTok{1000}\NormalTok{, }\DataTypeTok{replace =}\NormalTok{ T)}
+\NormalTok{arr_time =}\StringTok{ }\NormalTok{schd_time}\OperatorTok{+}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{1000}\NormalTok{,}\DecValTok{300}\NormalTok{,}\DecValTok{350}\NormalTok{)}\OperatorTok{*-}\DecValTok{1}\NormalTok{)}
+\NormalTok{on_time =}\StringTok{ }\KeywordTok{ifelse}\NormalTok{(}\KeywordTok{difftime}\NormalTok{(arr_time,schd_time)}\OperatorTok{<=}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{)}
+\NormalTok{time_delay =}\StringTok{ }\KeywordTok{difftime}\NormalTok{(arr_time,schd_time)}
+\NormalTok{data =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(crowd_curr,crowd_next,}
+\NormalTok{                  dist_prev, dist_next,speed,}
+\NormalTok{                  schd_time,arr_time,on_time,time_delay)}
+\KeywordTok{head}\NormalTok{(}\KeywordTok{select}\NormalTok{(data,crowd_curr,crowd_next,on_time),}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    crowd_curr crowd_next on_time
+## 1          28         27       0
+## 2          26         24       1
+## 3          31         21       1
+## 4          20         28       1
+## 5          27         21       0
+## 6          23         21       0
+## 7          22         23       1
+## 8          34         37       0
+## 9          32         21       1
+## 10         27         15       0
+\end{verbatim}
+
+\hypertarget{generating-an-algorithm-to-label-the-datasets}{%
+\subsection{Generating an algorithm to label the
+datasets}\label{generating-an-algorithm-to-label-the-datasets}}
+
+Each record is considered as a bus and the label is the indication given
+to the bus driver whether to maintain speed, decrease speed, or to
+increase represented by 0,1,2 respectively
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data =}\StringTok{ }\NormalTok{data }\OperatorTok{%>%}\StringTok{ }\KeywordTok{mutate}\NormalTok{(.,}\DataTypeTok{indicate =} \KeywordTok{with}\NormalTok{(.,}\KeywordTok{case_when}\NormalTok{(}
+\NormalTok{  (dist_next}\OperatorTok{<}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{dist_prev}\OperatorTok{<}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_next}\OperatorTok{<}\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_curr}\OperatorTok{<}\DecValTok{28}\NormalTok{) }\OperatorTok{~}\StringTok{ }\DecValTok{0}\NormalTok{,}
+\NormalTok{  (dist_next}\OperatorTok{<}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{dist_prev}\OperatorTok{<}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_next}\OperatorTok{<}\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_curr}\OperatorTok{>}\DecValTok{28}\NormalTok{) }\OperatorTok{~}\StringTok{ }\DecValTok{0}\NormalTok{,}
+\NormalTok{  (dist_next}\OperatorTok{<}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{dist_prev}\OperatorTok{<}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_next}\OperatorTok{>}\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_curr}\OperatorTok{<}\DecValTok{28}\NormalTok{) }\OperatorTok{~}\StringTok{ }\DecValTok{2}\NormalTok{,}
+\NormalTok{  (dist_next}\OperatorTok{<}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{dist_prev}\OperatorTok{<}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_next}\OperatorTok{>}\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_curr}\OperatorTok{>}\DecValTok{28}\NormalTok{) }\OperatorTok{~}\StringTok{ }\DecValTok{0}\NormalTok{,}
+\NormalTok{  (dist_next}\OperatorTok{<}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{dist_prev}\OperatorTok{>}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_next}\OperatorTok{<}\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_curr}\OperatorTok{<}\DecValTok{28}\NormalTok{) }\OperatorTok{~}\StringTok{ }\DecValTok{1}\NormalTok{,}
+\NormalTok{  (dist_next}\OperatorTok{<}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{dist_prev}\OperatorTok{>}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_next}\OperatorTok{<}\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_curr}\OperatorTok{>}\DecValTok{28}\NormalTok{) }\OperatorTok{~}\StringTok{ }\DecValTok{1}\NormalTok{,}
+\NormalTok{  (dist_next}\OperatorTok{<}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{dist_prev}\OperatorTok{>}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_next}\OperatorTok{>}\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_curr}\OperatorTok{<}\DecValTok{28}\NormalTok{) }\OperatorTok{~}\StringTok{ }\DecValTok{2}\NormalTok{,}
+\NormalTok{  (dist_next}\OperatorTok{<}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{dist_prev}\OperatorTok{>}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_next}\OperatorTok{>}\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_curr}\OperatorTok{>}\DecValTok{28}\NormalTok{) }\OperatorTok{~}\StringTok{ }\DecValTok{1}\NormalTok{,}
+\NormalTok{  (dist_next}\OperatorTok{>}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{dist_prev}\OperatorTok{<}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_next}\OperatorTok{<}\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_curr}\OperatorTok{<}\DecValTok{28}\NormalTok{) }\OperatorTok{~}\StringTok{ }\DecValTok{2}\NormalTok{,}
+\NormalTok{  (dist_next}\OperatorTok{>}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{dist_prev}\OperatorTok{<}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_next}\OperatorTok{<}\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_curr}\OperatorTok{>}\DecValTok{28}\NormalTok{) }\OperatorTok{~}\StringTok{ }\DecValTok{0}\NormalTok{,}
+\NormalTok{  (dist_next}\OperatorTok{>}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{dist_prev}\OperatorTok{<}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_next}\OperatorTok{>}\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_curr}\OperatorTok{<}\DecValTok{28}\NormalTok{) }\OperatorTok{~}\StringTok{ }\DecValTok{2}\NormalTok{,}
+\NormalTok{  (dist_next}\OperatorTok{>}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{dist_prev}\OperatorTok{<}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_next}\OperatorTok{>}\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_curr}\OperatorTok{>}\DecValTok{28}\NormalTok{) }\OperatorTok{~}\StringTok{ }\DecValTok{2}\NormalTok{,}
+\NormalTok{  (dist_next}\OperatorTok{>}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{dist_prev}\OperatorTok{>}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_next}\OperatorTok{<}\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_curr}\OperatorTok{<}\DecValTok{28}\NormalTok{) }\OperatorTok{~}\StringTok{ }\DecValTok{0}\NormalTok{,}
+\NormalTok{  (dist_next}\OperatorTok{>}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{dist_prev}\OperatorTok{>}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_next}\OperatorTok{<}\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_curr}\OperatorTok{>}\DecValTok{28}\NormalTok{) }\OperatorTok{~}\StringTok{ }\DecValTok{0}\NormalTok{,}
+\NormalTok{  (dist_next}\OperatorTok{>}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{dist_prev}\OperatorTok{>}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_next}\OperatorTok{>}\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_curr}\OperatorTok{<}\DecValTok{28}\NormalTok{) }\OperatorTok{~}\StringTok{ }\DecValTok{2}\NormalTok{,}
+\NormalTok{  (dist_next}\OperatorTok{>}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{dist_prev}\OperatorTok{>}\FloatTok{1.8} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_next}\OperatorTok{>}\DecValTok{25} \OperatorTok{&}\StringTok{ }\NormalTok{crowd_curr}\OperatorTok{>}\DecValTok{28}\NormalTok{) }\OperatorTok{~}\StringTok{ }\DecValTok{0}\NormalTok{,}
+\NormalTok{)))}
+
+\KeywordTok{head}\NormalTok{(}\KeywordTok{select}\NormalTok{(data,crowd_curr,on_time,indicate),}\DecValTok{10}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##    crowd_curr on_time indicate
+## 1          28       0       NA
+## 2          26       1        1
+## 3          31       1        0
+## 4          20       1        2
+## 5          27       0        0
+## 6          23       0        2
+## 7          22       1        0
+## 8          34       0        0
+## 9          32       1        0
+## 10         27       0        1
+\end{verbatim}
+
+~
+
+~
+
+~
+
+The table below indicates the indications that each of the bus instances
+receive
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data}\OperatorTok{$}\NormalTok{indicate =}\StringTok{ }\KeywordTok{factor}\NormalTok{(data}\OperatorTok{$}\NormalTok{indicate,}
+                       \DataTypeTok{levels=}\KeywordTok{c}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{2}\NormalTok{),}
+                       \DataTypeTok{labels =} \KeywordTok{c}\NormalTok{(}\StringTok{"Maintain Speed"}\NormalTok{,}
+                                  \StringTok{"Slow Down"}\NormalTok{,}
+                                  \StringTok{"Speed Up"}\NormalTok{))}
+\KeywordTok{table}\NormalTok{(data}\OperatorTok{$}\NormalTok{indicate)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Maintain Speed      Slow Down       Speed Up 
+##            314            124            412
+\end{verbatim}
+
+Thus we obtain the following observations from above table:
+
+\begin{itemize}
+\tightlist
+\item
+  Number of buses instructed to ``Maintain Speed'' : 314
+\item
+  Number of buses instructed to ``Slow Down'' : 123
+\item
+  Number of buses instructed to ``Speed Up'' : 412
+\end{itemize}
+
+~
+
+~
+
+~
+
+~
+
+\hypertarget{modelling-a-decision-tree-algorithm-to-make-future-scheduling}{%
+\subsection{Modelling a decision tree algorithm to make future
+scheduling}\label{modelling-a-decision-tree-algorithm-to-make-future-scheduling}}
+
+Splitting the data into train and test
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{1}\NormalTok{)}
+\NormalTok{split =}\StringTok{ }\KeywordTok{sample.split}\NormalTok{(data}\OperatorTok{$}\NormalTok{indicate, }\DataTypeTok{SplitRatio =} \FloatTok{0.75}\NormalTok{)}
+\NormalTok{train =}\StringTok{ }\NormalTok{data[split,]}
+\NormalTok{test =}\StringTok{ }\NormalTok{data[}\OperatorTok{!}\NormalTok{split,]}
+\end{Highlighting}
+\end{Shaded}
+
+Creating a penalty matrix to avoid miscalculation
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{penalty.matrix <-}\StringTok{ }\KeywordTok{matrix}\NormalTok{(}\KeywordTok{c}\NormalTok{(}\DecValTok{1}\NormalTok{,}\DecValTok{1}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{10}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{), }\DataTypeTok{byrow=}\OtherTok{TRUE}\NormalTok{, }\DataTypeTok{nrow=}\DecValTok{3}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+~
+
+~
+
+~
+
+~
+
+~
+
+~
+
+~
+
+~
+
+~
+
+~
+
+Building the decision tree model with rpart
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{dtree <-}\StringTok{ }\KeywordTok{rpart}\NormalTok{(indicate}\OperatorTok{~}\NormalTok{.,}\DataTypeTok{data=}\NormalTok{data,}\DataTypeTok{method =} \StringTok{"class"}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+Visualizing the decision tree
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{rpart.plot}\NormalTok{(dtree, }\DataTypeTok{nn=}\OtherTok{TRUE}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{../algorithm_generation_files/figure-latex/unnamed-chunk-23-1.pdf}
+
+~
+
+~
+
+~
+
+~
+
+~
+
+~
+
+~
+
+~
+
+~
+
+~
+
+\hypertarget{using-speed-and-on_time-parameters}{%
+\subsection{Using speed and on\_time
+parameters}\label{using-speed-and-on_time-parameters}}
+
+The speed and on\_time parameters can be used for further analysis and
+using a regression model, we can provide the driver with recommended
+speed indication to maintain their schedule, and to keep them aware of
+whether they're on time or not
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(}\KeywordTok{select}\NormalTok{(data,speed,on_time))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   speed on_time
+## 1 40.60       0
+## 2 52.75       1
+## 3 37.47       1
+## 4 73.93       1
+## 5 54.94       0
+## 6 37.69       0
+\end{verbatim}
+
+\hypertarget{bus-re-rerouting}{%
+\subsection{Bus re-rerouting}\label{bus-re-rerouting}}
+
+Consider each bus to be part of an area(a cluster), and each area has n
+number of buses, there are several routes in a given area, each route
+has predetermined number of buses plying through them.
+
+Creating dummy dataset
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{set.seed}\NormalTok{(}\DecValTok{0}\NormalTok{)}
+\NormalTok{data_route_}\DecValTok{1}\NormalTok{ =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{time =} \DecValTok{0}\OperatorTok{:}\DecValTok{23}\NormalTok{, }\DataTypeTok{crowd =} \KeywordTok{c}\NormalTok{(}\KeywordTok{round}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{2}\NormalTok{)),}\KeywordTok{round}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{2}\NormalTok{)),}\KeywordTok{round}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{15}\NormalTok{,}\DecValTok{2}\NormalTok{)),}\KeywordTok{round}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{1}\NormalTok{)),}\KeywordTok{round}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{1}\NormalTok{))))}
+\NormalTok{data_route_}\DecValTok{2}\NormalTok{ =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{time =} \DecValTok{0}\OperatorTok{:}\DecValTok{23}\NormalTok{, }\DataTypeTok{crowd =} \KeywordTok{c}\NormalTok{(}\KeywordTok{round}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{2}\NormalTok{)),}\KeywordTok{round}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{2}\NormalTok{)),}\KeywordTok{round}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{15}\NormalTok{,}\DecValTok{2}\NormalTok{)),}\KeywordTok{round}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{1}\NormalTok{)),}\KeywordTok{round}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{1}\NormalTok{))))}
+\NormalTok{data_route_}\DecValTok{2}\NormalTok{[}\DecValTok{15}\NormalTok{,}\DecValTok{2}\NormalTok{] =}\StringTok{ }\DecValTok{13}
+\NormalTok{data_route_}\DecValTok{3}\NormalTok{ =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{time =} \DecValTok{0}\OperatorTok{:}\DecValTok{23}\NormalTok{, }\DataTypeTok{crowd =} \KeywordTok{c}\NormalTok{(}\KeywordTok{round}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{8}\NormalTok{,}\DecValTok{2}\NormalTok{)),}\KeywordTok{round}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{2}\NormalTok{)),}\KeywordTok{round}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{6}\NormalTok{,}\DecValTok{15}\NormalTok{,}\DecValTok{2}\NormalTok{)),}\KeywordTok{round}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{12}\NormalTok{,}\DecValTok{1}\NormalTok{)),}\KeywordTok{round}\NormalTok{(}\KeywordTok{rnorm}\NormalTok{(}\DecValTok{3}\NormalTok{,}\DecValTok{6}\NormalTok{,}\DecValTok{1}\NormalTok{))))}
+\NormalTok{data_route_}\DecValTok{3}\NormalTok{[}\DecValTok{7}\NormalTok{,}\DecValTok{2}\NormalTok{] =}\StringTok{ }\DecValTok{17}
+\NormalTok{data_route_}\DecValTok{3}\NormalTok{[}\DecValTok{16}\NormalTok{,}\DecValTok{2}\NormalTok{] =}\StringTok{ }\DecValTok{12}
+\end{Highlighting}
+\end{Shaded}
+
+Using data analytics we determine the peak time of each route
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{g1 =}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}
+\NormalTok{  data_route_}\DecValTok{1}\NormalTok{,}
+      \KeywordTok{aes}\NormalTok{(}
+        \DataTypeTok{x =}\NormalTok{ time,}
+        \DataTypeTok{y =}\NormalTok{ crowd}
+\NormalTok{      )}
+\NormalTok{) }
+\NormalTok{g1 =}\StringTok{ }\NormalTok{g1 }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{color =} \StringTok{"orange"}\NormalTok{, }\DataTypeTok{size =} \DecValTok{3}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{theme_bw}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Peak Time Analysis"}\NormalTok{)}
+\NormalTok{g1}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{../algorithm_generation_files/figure-latex/unnamed-chunk-26-1.pdf}
+
+We can see that for route 1 the peak times are roughly around 9 am and 4
+pm
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{g1 }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_vline}\NormalTok{(}\DataTypeTok{xintercept =}\DecValTok{9}\NormalTok{,}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_vline}\NormalTok{(}\DataTypeTok{xintercept =}\DecValTok{16}\NormalTok{, }\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{../algorithm_generation_files/figure-latex/unnamed-chunk-27-1.pdf}
+
+Similarly we have analytical data on other routes, here - route 2 and
+route 3, with their respective peak times.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{g2 =}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}
+\NormalTok{  data_route_}\DecValTok{2}\NormalTok{,}
+      \KeywordTok{aes}\NormalTok{(}
+        \DataTypeTok{x =}\NormalTok{ time,}
+        \DataTypeTok{y =}\NormalTok{ crowd}
+\NormalTok{      )}
+\NormalTok{) }
+\NormalTok{g2 =}\StringTok{ }\NormalTok{g2 }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{color =} \StringTok{"orangered"}\NormalTok{, }\DataTypeTok{size =} \DecValTok{3}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{theme_bw}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Peak Time Analysis"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_vline}\NormalTok{(}\DataTypeTok{xintercept =}\DecValTok{12}\NormalTok{,}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_vline}\NormalTok{(}\DataTypeTok{xintercept =}\DecValTok{16}\NormalTok{, }\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }
+\NormalTok{g2}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{../algorithm_generation_files/figure-latex/unnamed-chunk-28-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{g2 =}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(}
+\NormalTok{  data_route_}\DecValTok{3}\NormalTok{,}
+      \KeywordTok{aes}\NormalTok{(}
+        \DataTypeTok{x =}\NormalTok{ time,}
+        \DataTypeTok{y =}\NormalTok{ crowd}
+\NormalTok{      )}
+\NormalTok{) }
+\NormalTok{g2 =}\StringTok{ }\NormalTok{g2 }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_line}\NormalTok{(}\DataTypeTok{color =} \StringTok{"steelblue"}\NormalTok{, }\DataTypeTok{size =} \DecValTok{3}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{theme_bw}\NormalTok{() }\OperatorTok{+}\StringTok{ }\KeywordTok{ggtitle}\NormalTok{(}\StringTok{"Peak Time Analysis"}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_vline}\NormalTok{(}\DataTypeTok{xintercept =}\DecValTok{6}\NormalTok{,}\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }\KeywordTok{geom_vline}\NormalTok{(}\DataTypeTok{xintercept =}\DecValTok{12}\NormalTok{, }\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }
+\NormalTok{g2}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{../algorithm_generation_files/figure-latex/unnamed-chunk-29-1.pdf}
+
+We make a comparative study of the different peak times and schedules
+buses through various routes depending on the analytical data on those
+peak time.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{data_all =}\StringTok{ }\KeywordTok{data.frame}\NormalTok{(data_route_}\DecValTok{1}\OperatorTok{$}\NormalTok{time,data_route_}\DecValTok{1}\OperatorTok{$}\NormalTok{crowd,data_route_}\DecValTok{2}\OperatorTok{$}\NormalTok{crowd,data_route_}\DecValTok{3}\OperatorTok{$}\NormalTok{crowd)}
+\KeywordTok{names}\NormalTok{(data_all) =}\StringTok{ }\KeywordTok{c}\NormalTok{(}\StringTok{"time"}\NormalTok{,}\StringTok{"crowd_route_1"}\NormalTok{,}\StringTok{"crowd_route_2"}\NormalTok{,}\StringTok{"crowd_route_3"}\NormalTok{)}
+
+
+\NormalTok{g =}\StringTok{ }\KeywordTok{ggplot}\NormalTok{(data_melt, }\KeywordTok{aes}\NormalTok{(}\DataTypeTok{x =}\NormalTok{ time)) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ crowd_route_}\DecValTok{1}\NormalTok{), }\DataTypeTok{color =} \StringTok{"orange"}\NormalTok{, }\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ crowd_route_}\DecValTok{2}\NormalTok{), }\DataTypeTok{color =} \StringTok{"orangered"}\NormalTok{, }\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}
+\StringTok{  }\KeywordTok{geom_line}\NormalTok{(}\KeywordTok{aes}\NormalTok{(}\DataTypeTok{y =}\NormalTok{ crowd_route_}\DecValTok{3}\NormalTok{), }\DataTypeTok{color =} \StringTok{"steelblue"}\NormalTok{, }\DataTypeTok{size =} \DecValTok{2}\NormalTok{) }\OperatorTok{+}\StringTok{ }
+\StringTok{  }\KeywordTok{theme_bw}\NormalTok{()}
+\NormalTok{g}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{../algorithm_generation_files/figure-latex/unnamed-chunk-30-1.pdf}
+
+\end{document}
