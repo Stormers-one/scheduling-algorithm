@@ -228,7 +228,7 @@ g1
 We can see that for route 1 the peak times are roughly around 9 am and 4 pm
 
 ```{r}
-g1 + geom_vline(xintercept =9,size = 2) + geom_vline(xintercept =16, size = 2) 
+g1 + geom_vline(xintercept =9,size = 2, col = "gray60") + geom_vline(xintercept =16, size = 2, col = "gray60") 
 ```
 
 Similarly we have analytical data on other routes, here - route 2 and route 3, with their respective peak times. 
@@ -241,7 +241,7 @@ g2 = ggplot(
         y = crowd
       )
 ) 
-g2 = g2 + geom_line(color = "orangered", size = 3) + theme_bw() + ggtitle("Peak Time Analysis") + geom_vline(xintercept =12,size = 2) + geom_vline(xintercept =16, size = 2) 
+g2 = g2 + geom_line(color = "orangered", size = 3) + theme_bw() + ggtitle("Peak Time Analysis") + geom_vline(xintercept =12,size = 2, col = "gray60") + geom_vline(xintercept =16, size = 2, col = "gray60") 
 g2
 ```
 
@@ -254,7 +254,7 @@ g2 = ggplot(
         y = crowd
       )
 ) 
-g2 = g2 + geom_line(color = "steelblue", size = 3) + theme_bw() + ggtitle("Peak Time Analysis") + geom_vline(xintercept =6,size = 2) + geom_vline(xintercept =12, size = 2) 
+g2 = g2 + geom_line(color = "steelblue", size = 3) + theme_bw() + ggtitle("Peak Time Analysis") + geom_vline(xintercept =6,size = 2, col = "gray60") + geom_vline(xintercept =12, size = 2, col = "gray60") 
 g2
 ```
 
@@ -265,7 +265,7 @@ data_all = data.frame(data_route_1$time,data_route_1$crowd,data_route_2$crowd,da
 names(data_all) = c("time","crowd_route_1","crowd_route_2","crowd_route_3")
 
 
-g = ggplot(data_melt, aes(x = time)) + 
+g = ggplot(data_all, aes(x = time)) + 
   geom_line(aes(y = crowd_route_1), color = "orange", size = 2) + 
   geom_line(aes(y = crowd_route_2), color = "orangered", size = 2) +
   geom_line(aes(y = crowd_route_3), color = "steelblue", size = 2) + 
