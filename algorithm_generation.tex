@@ -114,15 +114,90 @@ packages/Libraries}\label{importing-necessary-packageslibraries}}
 \begin{Shaded}
 \begin{Highlighting}[]
 \KeywordTok{invisible}\NormalTok{(}\KeywordTok{library}\NormalTok{(dplyr))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'dplyr'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:stats':
+## 
+##     filter, lag
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     intersect, setdiff, setequal, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{invisible}\NormalTok{(}\KeywordTok{library}\NormalTok{(lubridate))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'lubridate'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:base':
+## 
+##     date, intersect, setdiff, union
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{invisible}\NormalTok{(}\KeywordTok{library}\NormalTok{(caTools))}
 \KeywordTok{invisible}\NormalTok{(}\KeywordTok{library}\NormalTok{(data.table))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## data.table 1.12.8 using 4 threads (see ?getDTthreads).  Latest news: r-datatable.com
+\end{verbatim}
+
+\begin{verbatim}
+## 
+## Attaching package: 'data.table'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:lubridate':
+## 
+##     hour, isoweek, mday, minute, month, quarter, second, wday, week, yday, year
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:dplyr':
+## 
+##     between, first, last
+\end{verbatim}
+
+\begin{Shaded}
+\begin{Highlighting}[]
 \KeywordTok{invisible}\NormalTok{(}\KeywordTok{library}\NormalTok{(rpart))}
 \KeywordTok{invisible}\NormalTok{(}\KeywordTok{library}\NormalTok{(rpart.plot))}
 \KeywordTok{invisible}\NormalTok{(}\KeywordTok{library}\NormalTok{(ggplot2))}
 \KeywordTok{invisible}\NormalTok{(}\KeywordTok{library}\NormalTok{(reshape2))}
 \end{Highlighting}
 \end{Shaded}
+
+\begin{verbatim}
+## 
+## Attaching package: 'reshape2'
+\end{verbatim}
+
+\begin{verbatim}
+## The following objects are masked from 'package:data.table':
+## 
+##     dcast, melt
+\end{verbatim}
 
 \hypertarget{generating-the-dataset}{%
 \subsection{Generating the dataset}\label{generating-the-dataset}}
@@ -345,7 +420,7 @@ Visualizing the decision tree
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{../algorithm_generation_files/figure-latex/unnamed-chunk-23-1.pdf}
+\includegraphics{../algorithm_generation_files/figure-latex/unnamed-chunk-8-1.pdf}
 
 ~
 
@@ -429,7 +504,7 @@ Using data analytics we determine the peak time of each route
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{../algorithm_generation_files/figure-latex/unnamed-chunk-26-1.pdf}
+\includegraphics{../algorithm_generation_files/figure-latex/unnamed-chunk-11-1.pdf}
 
 We can see that for route 1 the peak times are roughly around 9 am and 4
 pm
@@ -440,7 +515,7 @@ pm
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{../algorithm_generation_files/figure-latex/unnamed-chunk-27-1.pdf}
+\includegraphics{../algorithm_generation_files/figure-latex/unnamed-chunk-12-1.pdf}
 
 Similarly we have analytical data on other routes, here - route 2 and
 route 3, with their respective peak times.
@@ -459,7 +534,7 @@ route 3, with their respective peak times.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{../algorithm_generation_files/figure-latex/unnamed-chunk-28-1.pdf}
+\includegraphics{../algorithm_generation_files/figure-latex/unnamed-chunk-13-1.pdf}
 
 \begin{Shaded}
 \begin{Highlighting}[]
@@ -475,7 +550,7 @@ route 3, with their respective peak times.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{../algorithm_generation_files/figure-latex/unnamed-chunk-29-1.pdf}
+\includegraphics{../algorithm_generation_files/figure-latex/unnamed-chunk-14-1.pdf}
 
 We make a comparative study of the different peak times and schedules
 buses through various routes depending on the analytical data on those
@@ -496,6 +571,6 @@ peak time.
 \end{Highlighting}
 \end{Shaded}
 
-\includegraphics{../algorithm_generation_files/figure-latex/unnamed-chunk-30-1.pdf}
+\includegraphics{../algorithm_generation_files/figure-latex/unnamed-chunk-15-1.pdf}
 
 \end{document}
