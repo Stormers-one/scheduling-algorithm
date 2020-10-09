@@ -271,5 +271,52 @@ g = ggplot(data_all, aes(x = time)) +
   geom_line(aes(y = crowd_route_3), color = "steelblue", size = 2) + 
   theme_bw()
 g
+```  
+An efficient system can be created by scheduling the buses to maintain adequate 
+distance between them and when threshold of speed is encountered detected using 
+statistical inference on analytical data, we deploy/redeploy buses, reroute and 
+so on. which makes uses of resources at bare minimum and combats delays.
+
+Monitoring the delays on a particular route and by using statistical inferencing
+on the analytical data we can optimize bus schedule through rerouting, 
+deployment/undeployment, and so on.
+
+```{r}
+set.seed(30)
+bus_arrival_5 = data.frame(time=rep(17,365) + rnorm(365,0,5)/100)
+q = as.numeric(quantile(bus_arrival_5$time,c(0.025,0.34,0.68,0.975)))
+d <- density(bus_arrival_5$time)
+data <- data.frame(x=d$x, y=d$y)
+data = data %>% mutate(., col = factor(with(., case_when(
+  (x<q[1])~1,
+  (x>=q[1]&x<q[4])~2,
+  (x>=q[4])~0
+))))
+#png(file="bus_norm.png")
+g = ggplot(
+  data, 
+  aes(x,y)
+) + geom_line() +
+  geom_ribbon(aes(ymin=0, ymax=y, fill=col)) +
+  #scale_x_continuous(breaks=q) +
+  #scale_fill_brewer(guide="none") + 
+  ggtitle("Distribution of arrival times around 5pm on a given day") +
+  xlab("Time") + 
+  theme_bw()
+#g
+#dev.off()
+#d = density(bus_arrival_5)
+#plot(d, main = "Distribution of arrival times around 5pm on a given day", xlab = "Time")
+#polygon(d, col="skyblue", border="violet")
+#g = ggplot(
+#  bus_arrival,
+#  aes(
+#    x=time
+#  )
+#) + geom_density(color="darkblue") + 
+#  geom_vline(xintercept =q,linetype = "longdash") +
+#  theme_bw()
+g
 ```
+
 
