@@ -10,9 +10,10 @@ from firebase_admin import firestore
 app = Flask(__name__)
 
 cred = credentials.Certificate('/var/www/html/suggestAPI/secret/oduFireKey.json')
-firebase_admin.initialize_app(cred)
+default_app = firebase_admin.initialize_app(cred)
 
 db = firestore.client()
+suggestSchd_ref = db.collection(u'Schedule Suggest')
 
 def aggregate():
     df = pandas.read_csv(
@@ -91,12 +92,26 @@ def aggregate():
 
     return cap
 
+def standardizeRoutes(row):
+  datList = row.split(' ')
+  datList[0] = datList[0][0].upper()+datList[0][1:].lower()
+  datList[1] = datList[1][0].upper()+datList[1][1:].lower()
+  return " - ".join(datList)
+
 def standardize_data(data):
   data = data.rename({'Exceed_Diminish':'status','Count_exceeded_diminished':'count'},axis=1)
   data['status'] = data['status'].replace({1:'Surplus',0:'Shortage'})
+  data['Route'] = data['Route'].apply(standardizeRoutes)
   return data
 
 def upload_collection(data):
+  for i in range(data.shape[0]):
+    tmp = {
+      'routeName':data.loc[i,'Route'],
+      'status':data.loc[i,'status'],
+      'count':data.loc[i,'count']
+    }
+    suggestSchd_ref.document().set(tmp)
   return 'Done'
 
 def output_display(data):
@@ -112,14 +127,10 @@ def output_display(data):
 def home():
   return 'Suggest API Home'
 
-@app.route('/api/v1/suggest', methods = ['GET'])
+@app.route('/api/v1/suggest', methods = ['GET','POST','PUT'])
 def suggest():
   res = aggregate()
   res = standardize_data(res)
   upload_collection(res)
-#  res = flask.jsonify(res)
-  res = output_display(res)
-  return(res)
-
-#if __name__ == '__main__':
-#  app.run()
+  # res = output_display(res)
+  return(str(jsonify(res)))
