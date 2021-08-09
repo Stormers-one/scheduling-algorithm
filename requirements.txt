@@ -78,7 +78,7 @@ PyQtWebEngine==5.12.1
 pyrsistent @ file:///D:/bld/pyrsistent_1610147004555/work
 python-dateutil==2.8.1
 pytz @ file:///home/conda/feedstock_root/build_artifacts/pytz_1612179539967/work
-pywin32==300
+pywin32==301
 pywinpty @ file:///D:/bld/pywinpty_1621378659215/work/target/wheels/pywinpty-1.1.1-cp39-none-win_amd64.whl
 pyzmq @ file:///D:/bld/pyzmq_1622038686207/work
 requests==2.25.1
